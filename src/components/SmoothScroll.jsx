@@ -5,7 +5,7 @@ const SmoothScroll = () => {
   useEffect(() => {
     const lenis = new Lenis({
         smoothWheel: true, // enable smooth scrolling for mouse wheel events
-        lerp: 0.100, // adjust the linear interpolation intensity for smoother scrolling
+        lerp: 0.050, // adjust the linear interpolation intensity for smoother scrolling
         orientation: 'vertical', // scroll orientation
         gestureOrientation: 'vertical', // gesture orientation
         syncTouch: true, // mimic touch device scroll while allowing scroll sync
