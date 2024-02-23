@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollParallax } from 'react-just-parallax';
 import { Link } from 'react-router-dom';
 
-function FullBWSection({background, text, button, href, title, description, image, translate, opacity, bgOpacity}) {
+function FullBWSection({background, text, button, href, title, description, image, translate, opacity}) {
 
     const createMarkup = (htmlContent) => {
         return {__html: htmlContent};

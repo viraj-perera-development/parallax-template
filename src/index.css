@@ -28,3 +28,57 @@ code {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.progress-button-light {
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.progress-button-light::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: rgb(248 250 252); 
+  transition: width 0.5s ease;
+  z-index: -1;
+}
+
+.progress-button-light:hover::after {
+  width: 100%;
+}
+
+.progress-button-light:hover {
+  color: black; /* text-black equivalent */
+  z-index: 1;
+}
+
+.progress-button-dark {
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.progress-button-dark::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: rgb(0, 0, 0); 
+  transition: width 0.5s ease;
+  z-index: -1;
+}
+
+.progress-button-dark:hover::after {
+  width: 100%;
+}
+
+.progress-button-dark:hover {
+  color: rgb(255, 255, 255); /* text-black equivalent */
+  z-index: 1;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollParallax } from 'react-just-parallax';
-import headerImage from "../assets/minimalSection/testata_home_3.jpg";
+import headerImage from "../assets/staticSection/7.png";
 import logoTransp from '../assets/mouseFollow/CIGtrasparente.png';
 import { Link } from 'react-router-dom';
 
@@ -22,7 +22,7 @@ function FullMinimalSection() {
               <div className="absolute text-start ps-15 lg:ps-96 ml-[5%]">
                   <h2 className="text-7xl text-white font-semibold" data-aos="fade-up" data-aos-duration="1000">Italian company, <br/>Swiss gold.</h2>
                   <p className="text-xl mt-4 mb-10 text-white" data-aos="fade-up" data-aos-duration="1000">Explore the beauty of Viraj.</p>
-                  <Link to="/" rel='noopener noreferrer' className={`px-8 py-2 uppercase border border-slate-50 text-slate-50 transition duration-300 ease-in-out`}>Scopri di più</Link>
+                  <Link to="/" rel='noopener noreferrer' className={`px-8 py-2 progress-button-light uppercase border border-slate-50 text-slate-50 transition duration-300 ease-in-out`}>Scopri di più</Link>
               </div>
           </div>
       </div>
