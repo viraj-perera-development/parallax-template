@@ -82,3 +82,8 @@ code {
   color: rgb(255, 255, 255); /* text-black equivalent */
   z-index: 1;
 }
+
+.Smoke {
+  font-family: sans-serif;
+  text-align: center;
+}

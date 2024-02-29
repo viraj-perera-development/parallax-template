@@ -5,6 +5,7 @@ import FullBWSection from '../components/FullBWsection';
 import FullTransparentSection from '../components/FullTransparent';
 import Static1 from '../components/Static1';
 import MouseFollow from '../components/MouseFollow';
+import WaterSection from '../components/WaterSection';
 import cassaforte from '../assets/minimalSection/cassaforte.jpg';
 import invest from '../assets/minimalSection/invest.jpg';
 import logoNero from '../assets/mouseFollow/logonero.png';
@@ -19,6 +20,7 @@ import ballerina from '../assets/staticSection/2.png';
 import ballerina2 from '../assets/staticSection/3.png';
 import pattern from '../assets/staticSection/10.png';
 import acqua from '../assets/staticSection/8.png';
+import Smoke from '../components/SmokeSection';
 
 
 
@@ -150,6 +152,9 @@ function HomePage() {
         orientation="right"
       />
       <Static1/>
+      <WaterSection/>
+      <Smoke/>
+
     </div>
   )
 }
