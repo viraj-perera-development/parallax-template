@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MinimalSection from '../components/MinimalSection';
 import FullMinimalSection from '../components/FullMinimalSection';
 import FullBWSection from '../components/FullBWsection';
 import FullTransparentSection from '../components/FullTransparent';
 import Static1 from '../components/Static1';
 import MouseFollow from '../components/MouseFollow';
-import WaterSection from '../components/WaterSection';
+
 import cassaforte from '../assets/minimalSection/cassaforte.jpg';
 import invest from '../assets/minimalSection/invest.jpg';
 import logoNero from '../assets/mouseFollow/logonero.png';
@@ -20,14 +20,34 @@ import ballerina from '../assets/staticSection/2.png';
 import ballerina2 from '../assets/staticSection/3.png';
 import pattern from '../assets/staticSection/10.png';
 import acqua from '../assets/staticSection/8.png';
-import Smoke from '../components/SmokeSection';
-
-
-
+import WaterSection from '../components/WaterSection';
 
 
 
 function HomePage() {
+
+  const [inViewport, setInViewport] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInViewport(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          // alert('Component is in the viewport');
+        } else {
+          // alert('Component is not in the viewport');
+        }
+      },
+      { threshold: 0 } // Adjust the threshold as needed
+    );
+
+    observer.observe(sectionRef.current);
+
+    return () => {
+      observer.unobserve(sectionRef.current);
+    };
+  }, []);
 
   return (
     <div className="" style={{"height":"1000rem"}}>
@@ -137,24 +157,26 @@ function HomePage() {
         backgroundColor='bg-black'
         orientation="left"
       />
-      <FullTransparentSection 
-        background={acqua}
-        text='text-black'
-        button='border border-black text-black progress-button-dark'
-        href='/'
-        title='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-        description='In tincidunt ut sapien quis auctor. Nulla fringilla congue justo, nec auctor ante efficitur a. Mauris ac elit eget quam mattis pellentesque eget ut enim. Nunc mollis vehicula nisl eget sollicitudin. Vivamus luctus rhoncus pellentesque.'
-        image={diagonallyWR}
-        opacity='opacity-100 left-0 top-[-40vh] h-[100vh] w-full md:w-[100vh]'
-        bgOpacity='bg-white'
-        translate='xl:translate-x-[30%]'
-        backgroundColor='bg-white'
-        orientation="right"
-      />
-      <Static1/>
-      <WaterSection/>
-      <Smoke/>
-
+        <FullTransparentSection 
+          background={acqua}
+          text='text-black'
+          button='border border-black text-black progress-button-dark'
+          href='/'
+          title='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+          description='In tincidunt ut sapien quis auctor. Nulla fringilla congue justo, nec auctor ante efficitur a. Mauris ac elit eget quam mattis pellentesque eget ut enim. Nunc mollis vehicula nisl eget sollicitudin. Vivamus luctus rhoncus pellentesque.'
+          image={diagonallyWR}
+          opacity='opacity-100 left-0 top-[-40vh] h-[100vh] w-full md:w-[100vh]'
+          bgOpacity='bg-white'
+          translate='xl:translate-x-[30%]'
+          backgroundColor='bg-white'
+          orientation="right"
+        />
+      <div ref={sectionRef}>
+        <Static1/>
+        {inViewport && (
+          <WaterSection />
+        )}
+      </div>
     </div>
   )
 }
