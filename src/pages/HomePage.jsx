@@ -21,36 +21,15 @@ import ballerina2 from '../assets/staticSection/3.png';
 import pattern from '../assets/staticSection/10.png';
 import acqua from '../assets/staticSection/8.png';
 import WaterSection from '../components/WaterSection';
+import Navbar from '../components/Navbar';
 
 
 
 function HomePage() {
 
-  const [inViewport, setInViewport] = useState(false);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setInViewport(entry.isIntersecting);
-        if (entry.isIntersecting) {
-          // alert('Component is in the viewport');
-        } else {
-          // alert('Component is not in the viewport');
-        }
-      },
-      { threshold: 0 } // Adjust the threshold as needed
-    );
-
-    observer.observe(sectionRef.current);
-
-    return () => {
-      observer.unobserve(sectionRef.current);
-    };
-  }, []);
-
   return (
     <div className="" style={{"height":"1000rem"}}>
+      <Navbar />
       <MouseFollow/>
       <MinimalSection 
         orientation='right' 
@@ -171,12 +150,7 @@ function HomePage() {
           backgroundColor='bg-white'
           orientation="right"
         />
-      <div ref={sectionRef}>
         <Static1/>
-        {inViewport && (
-          <WaterSection />
-        )}
-      </div>
     </div>
   )
 }

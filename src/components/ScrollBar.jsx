@@ -3,7 +3,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 
 function ScrollBar() {
     const { scrollYProgress } = useScroll();
-    const scaleY = useSpring(scrollYProgress, {
+    const scaleX = useSpring(scrollYProgress, {
         stiffness: 100,
         damping: 30,
         restDelta: 0.001
@@ -12,11 +12,10 @@ function ScrollBar() {
     return (
         <>
             <motion.div
-                className="top-0 bottom-0 fixed origin-top right-0 me-44 hidden lg:block w-px z-40 bg-[#ba953e]"
-                style={{ scaleY }}
+                className="fixed bottom-0 left-0 h-[0.15rem] lg:w-full z-40 bg-[#ba953e]"
+                style={{ scaleX, originX: 0 }}
             />
-            <div className="fixed top-0 bottom-0 right-0 me-44 hidden lg:block w-px bg-zinc-200 text-white flex items-center justify-center z-30">
-            </div>
+            <div className="fixed bottom-0 left-0 h-[0.15rem] w-full bg-zinc-200 z-30"></div>
         </>
     );
 }

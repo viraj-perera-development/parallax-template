@@ -32,8 +32,8 @@ function MouseFollow() {
                 data-aos="fade-up"
                 data-aos-duration="2000"
             >
-                <h2 className="text-7xl text-white font-semibold">Italian company, <br/>Swiss gold.</h2>
-                <p className="text-xl mt-4 text-white">Explore the beauty of Viraj.</p>
+                <h2 className="text-7xl text-white font-semibold">L'Oro per tutti, <br/>prima di tutti.</h2>
+                <p className="text-xl mt-4 text-white">La prima azienda a rendere l'Oro da investimento<br/> accessibile a ogni famiglia.</p>
             </div>
             <SlArrowDown 
                 data-aos="fade-up"

@@ -29,6 +29,12 @@ code {
   background-repeat: no-repeat;
 }
 
+.background-cassaforte{
+  background-image: url('./assets/minimalSection/cassaforte.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .progress-button-light {
   position: relative;
   overflow: hidden;
@@ -84,7 +90,6 @@ code {
 }
 
 .Smoke {
-  font-family: sans-serif;
   text-align: center;
 }
 
@@ -93,3 +98,9 @@ canvas {
   height: 100%;
   z-index: 9999;
 }
+
+.link-hidden {
+  opacity: 0;
+  transition: ease-in-out;
+}
+

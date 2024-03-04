@@ -2,8 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage';
-import TemplateOne from './pages/TemplateOne';
+import MinimalPage from './pages/MinimalPage';
 import SmokePage from './pages/SmokePage';
+import WaterPage from './pages/WaterPage';
 
 
 
@@ -13,8 +14,9 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<HomePage />} />
-          <Route exact path="/template-one" element={<TemplateOne />} />
+          <Route exact path="/template-minimal" element={<MinimalPage />} />
           <Route exact path="/template-smoke" element={<SmokePage />} />
+          <Route exact path="/template-water" element={<WaterPage />} />
         </Routes>
       </Router>
     </div>

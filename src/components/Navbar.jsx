@@ -1,0 +1,88 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { IoClose } from "react-icons/io5";
+import { RxHamburgerMenu } from "react-icons/rx";
+import caveaux from '../assets/minimalSection/cassaforte.jpg'
+
+function Navbar() {
+    const [isVisible, setIsVisible] = useState(true);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [menuTransition, setMenuTransition] = useState(false);
+    const [hideLink, setHideLink] = useState(false);
+
+    let lastScrollY = window.scrollY;
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!isMenuOpen) {
+                setIsVisible(window.scrollY < lastScrollY);
+                lastScrollY = window.scrollY;
+                document.body.style.overflow = 'auto';
+            } else if (isMenuOpen){
+                document.body.style.overflow = 'hidden';
+            }
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isMenuOpen]); // Include isMenuOpen in the dependency array
+
+
+    const handleMenuOpen = () => {
+        setIsMenuOpen(true);
+        setHideLink(false);
+        setTimeout(() => {
+            setMenuTransition(true);
+        }, 1000);
+    };
+
+    const handleMenuClose = () => {
+        setHideLink(true);
+        setTimeout(() => {
+            setMenuTransition(false);
+            setIsMenuOpen(false);
+        }, 900);
+    };
+
+
+    return (
+        <div className={`fixed z-40 top-0 left-0 w-full bg-transparent transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+            <div className="flex justify-between items-center p-10">
+                <div className="text-slate-50 uppercase text-xl">Logo</div>
+                <div className="hidden lg:block">
+                    <nav className="flex justify-end items-center">
+                        <Link to="/" className="text-slate-50 uppercase mx-6">Home</Link>
+                        <Link to="/" className="text-slate-50 uppercase mx-6">Azienda</Link>
+                        <Link to="/" className="text-slate-50 uppercase mx-6">Notizie</Link>
+                        <Link to="/" className="text-slate-50 uppercase mx-6">Prodotti</Link>
+                        <Link to="/" className="text-slate-50 uppercase mx-6">Collabora con noi</Link>
+                        <Link to="/" className="text-slate-50 uppercase mx-6">FAQ</Link>
+                        <Link to="/" className="text-slate-50 uppercase mx-6">Contatti</Link>
+                    </nav>
+                </div>
+                <div className="lg:hidden">
+                    <button className="w-6 h-6 text-white" onClick={handleMenuOpen}>
+                        <RxHamburgerMenu className='text-3xl' />
+                    </button>
+                    <nav className={`flex flex-col justify-center items-center absolute top-0 right-0 w-full h-full bg-black transition-all duration-[1000ms] ease-in ${isMenuOpen ? 'opacity-100' : 'opacity-0'} ${isMenuOpen ? 'translate-y-0' : '-translate-y-full'} ${isMenuOpen && 'h-screen'}`}>
+                    {menuTransition && (
+                        <>
+                            <Link to="/" data-aos="fade-right" data-aos-duration="250" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Home</Link>
+                            <Link to="/" data-aos="fade-right" data-aos-duration="500" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Azienda</Link>
+                            <Link to="/" data-aos="fade-right" data-aos-duration="750" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Notizie</Link>
+                            <Link to="/" data-aos="fade-right" data-aos-duration="1000" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Prodotti</Link>
+                            <Link to="/" data-aos="fade-right" data-aos-duration="1250" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Collabora con noi</Link>
+                            <Link to="/" data-aos="fade-right" data-aos-duration="1500" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>FAQ</Link>
+                            <Link to="/" data-aos="fade-right" data-aos-duration="1750" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Contatti</Link>
+                        </>
+                    )}
+                        <button className="absolute top-0 right-0 w-6 h-6 text-white m-10" onClick={handleMenuClose}>
+                            <IoClose className='text-3xl'/>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Navbar;
