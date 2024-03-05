@@ -1,5 +1,5 @@
 import React from 'react';
-import headerImage from "../assets/staticSection/5.png";
+import headerImage from "../assets/staticSection/desert1.png";
 import logoTransp from '../assets/mouseFollow/CIGtrasparente.png';
 import { Link } from 'react-router-dom';
 

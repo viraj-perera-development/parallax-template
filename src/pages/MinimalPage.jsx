@@ -1,7 +1,7 @@
 import React from 'react'
 import HeaderSinglePage from '../components/HeaderSinglePage'
 import logoNero from '../assets/mouseFollow/logonero.png';
-import headerImage from "../assets/staticSection/7.png";
+import headerImage from "../assets/staticSection/family4.jpg";
 
 
 function templateOne() {

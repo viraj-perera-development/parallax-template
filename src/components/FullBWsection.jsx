@@ -16,6 +16,7 @@ function FullBWSection({background, text, button, href, title, description, imag
                         <img src={image}
                             className={`absolute left-0 top-[-40vh] h-[200vh] w-full md:w-[200vh] object-contain ${opacity}`}
                             alt='logo careisgold'
+                            style={{ transform: 'scale(1.2)' }}
                         />
                     </ScrollParallax>
                     {/* Adjust the text container to be more responsive */}

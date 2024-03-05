@@ -8,19 +8,18 @@ import MouseFollow from '../components/MouseFollow';
 
 import cassaforte from '../assets/minimalSection/cassaforte.jpg';
 import invest from '../assets/minimalSection/invest.jpg';
-import logoNero from '../assets/mouseFollow/logonero.png';
-import logoBianco from '../assets/mouseFollow/logobianco.png';
+import logoNero from '../assets/staticSection/schizzi-oro2.png';
+import logoBianco from '../assets/staticSection/schizzi-oro3.png';
 import logoVuotoNero from '../assets/mouseFollow/logo-sfondo-nero.png';
 import logoVuotoBianco from '../assets/mouseFollow/logo-sfondo-bianco.png';
 import diagonally from '../assets/mouseFollow/diagonalley_nero.png';
 import diagonallyWR from '../assets/mouseFollow/diagonalley_strana_bianco.png';
-import grano from '../assets/staticSection/6.png';
-import sabbia from '../assets/staticSection/9.png';
-import ballerina from '../assets/staticSection/2.png';
-import ballerina2 from '../assets/staticSection/3.png';
-import pattern from '../assets/staticSection/10.png';
-import acqua from '../assets/staticSection/8.png';
-import WaterSection from '../components/WaterSection';
+import grano from '../assets/staticSection/grano1.png';
+import sabbia from '../assets/staticSection/grano1.png';
+import ballerina from '../assets/staticSection/family8.jpg';
+import ballerina2 from '../assets/staticSection/ballerina1.png';
+import pattern from '../assets/staticSection/forme-oro4.png';
+import acqua from '../assets/staticSection/forme-oro3.png';
 import Navbar from '../components/Navbar';
 
 
@@ -49,6 +48,7 @@ function HomePage() {
         buttonText='scopri di più'
         href='/'
         imageUrl={ballerina2}
+        imgOpacity="opacity-80"
         strength='0.14'
         lerp='0.30'
       />
@@ -70,6 +70,7 @@ function HomePage() {
         buttonText='scopri di più'
         href='/'
         imageUrl={ballerina}
+        imgOpacity="opacity-60"
         strength='0.14'
         lerp='0.30'
       />
@@ -82,7 +83,7 @@ function HomePage() {
         title='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
         description='In tincidunt ut sapien quis auctor. Nulla fringilla congue justo, nec auctor ante efficitur a. Mauris ac elit eget quam mattis pellentesque eget ut enim. Nunc mollis vehicula nisl eget sollicitudin. Vivamus luctus rhoncus pellentesque.'
         image={logoNero}
-        opacity='opacity-10'
+        opacity='opacity-100'
         translate='md:translate-x-[20%]'
       />
       <FullBWSection 
@@ -93,7 +94,7 @@ function HomePage() {
         title='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
         description='In tincidunt ut sapien quis auctor. Nulla fringilla congue justo, nec auctor ante efficitur a. Mauris ac elit eget quam mattis pellentesque eget ut enim. Nunc mollis vehicula nisl eget sollicitudin. Vivamus luctus rhoncus pellentesque.'
         image={logoBianco}
-        opacity='opacity-10'
+        opacity='opacity-100'
         translate='xl:translate-x-[80%]'
       />
       <FullTransparentSection 

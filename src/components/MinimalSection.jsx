@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollParallax } from "react-just-parallax";
 import { Link } from 'react-router-dom';
 
-function MinimalSection({ orientation, background, title, description, href, imageUrl, buttonClass, titleClass, descriptionClass, buttonText, strength, lerp }) {
+function MinimalSection({ orientation, background, title, description, href, imageUrl, buttonClass, titleClass, descriptionClass, buttonText, strength, lerp, imgOpacity }) {
 
 const createMarkup = (htmlContent) => {
     return {__html: htmlContent};
@@ -15,7 +15,7 @@ const createMarkup = (htmlContent) => {
             <section>
                 <div className='mx-auto'>
                     <div className='h-dvh flex justify-center items-center'>
-                        <div className='h-dvh hidden sm:block sm:w-1/4 z-0'>
+                        <div className={`${imgOpacity} h-dvh hidden sm:block sm:w-1/4 z-0`}>
                             <ScrollParallax lerpEase={lerp} zIndex='0' enableOnTouchDevice={false} strength={strength}>
                                 <img src={imageUrl} alt={title} className='w-full h-full object-cover' />
                             </ScrollParallax>
@@ -43,7 +43,7 @@ const createMarkup = (htmlContent) => {
                                 <Link to={href} rel='noopener noreferrer' className={`px-8 py-2 uppercase  ${buttonClass} transition duration-300 ease-in-out`}>{buttonText}</Link>
                             </div>
                         </div>  
-                        <div className='h-dvh hidden sm:block sm:w-1/4 z-0'>
+                        <div className={`${imgOpacity} h-dvh hidden sm:block sm:w-1/4 z-0`}>
                             <ScrollParallax lerpEase={lerp} zIndex='0' enableOnTouchDevice={false} strength={strength}>
                                 <img src={imageUrl} alt={title} className='w-full h-full object-cover' />
                             </ScrollParallax>

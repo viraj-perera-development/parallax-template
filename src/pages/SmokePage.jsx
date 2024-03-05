@@ -3,7 +3,7 @@ import Smoke from '../components/SmokeSection';
 import { useTrail, animated } from 'react-spring';
 
 function SmokePage() {
-  const text = "Risparmi andati in fumo?";
+  const text = "Andrea ancora non lo sai ma sei gay1";
   const items = text.split('');
   const trail = useTrail(items.length, {
     from: { opacity: 0, transform: 'translateY(20px)' },

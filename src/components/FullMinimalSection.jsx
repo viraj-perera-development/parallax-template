@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollParallax } from 'react-just-parallax';
-import headerImage from "../assets/staticSection/7.png";
+import headerImage from "../assets/staticSection/family4.jpg";
 import logoTransp from '../assets/mouseFollow/CIGtrasparente.png';
 import { Link } from 'react-router-dom';
 
@@ -9,12 +9,12 @@ function FullMinimalSection() {
     <>
       <div className='relative z-20 h-dvh overflow-hidden'>
           <ScrollParallax enableOnTouchDevice={true} isAbsolutelyPositioned={true} lerpEase="0.05">
-              <img src={headerImage} alt='header image' className="absolute top-0 left-0 w-full h-full object-cover" />
+              <img src={headerImage} alt='header image' className="absolute top-0 left-0 w-full h-full object-cover" style={{ transform: 'scale(1.2)' }} />
           </ScrollParallax>
           <div className="absolute top-0 left-0 bg-black bg-opacity-40 w-full h-full flex justify-center items-center">
               <ScrollParallax enableOnTouchDevice={true} isAbsolutelyPositioned={true} lerpEase="0.08">
                   <img  src={logoTransp}      
-                        className="absolute left-[-80vh] top-[-250vh] h-[500vh] w-[500vh] object-contain"
+                        className="absolute left-[120vh] top-[-70vh] h-[150vh] w-[150vh] object-contain"
                         alt='logo careisgold'
                      />
               </ScrollParallax>

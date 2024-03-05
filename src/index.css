@@ -104,3 +104,16 @@ canvas {
   transition: ease-in-out;
 }
 
+.text-negative {
+  color: black;
+  display: block;
+  filter: invert(1);
+  mix-blend-mode: difference;
+}
+
+.text-negative-remove {
+  color: black;
+  display: block;
+  filter: invert(0)!important;
+  mix-blend-mode: normal !important;
+}

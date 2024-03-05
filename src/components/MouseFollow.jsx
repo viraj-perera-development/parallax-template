@@ -17,14 +17,14 @@ function MouseFollow() {
   return (
     <>
     <div className='relative z-20 h-dvh overflow-hidden'>
-        <MouseParallax enableOnTouchDevice={true} isAbsolutelyPositioned={true} strength="0.05">
+        <MouseParallax enableOnTouchDevice={true} isAbsolutelyPositioned={true} strength="0.2">
             <video className="absolute top-0 left-0 w-full h-full object-cover" style={{ transform: 'scale(1.2)' }} autoPlay muted playsInline loop>
                 <source src={mountainVideo} type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
         </MouseParallax>
-        <div className="absolute top-0 left-0 bg-amber-200 bg-opacity-30 w-full h-full">
-            <MouseParallax enableOnTouchDevice={true} isAbsolutelyPositioned={true} strength="0.025">
+        <div className="absolute top-0 left-0 bg-amber-400 bg-opacity-5 w-full h-full">
+            <MouseParallax enableOnTouchDevice={true} isAbsolutelyPositioned={true} strength="0.1">
                 {/* Adjust the image to be more to the right and cover 100vh without stretching */}
                 <img src={logoTransp} className='opacity-30' style={{ position: 'absolute', right: '-60vh', height: '150vh', objectFit: 'contain' }} alt='logo careisgold' />
             </MouseParallax>

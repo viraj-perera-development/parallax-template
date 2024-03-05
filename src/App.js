@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import MinimalPage from './pages/MinimalPage';
 import SmokePage from './pages/SmokePage';
 import WaterPage from './pages/WaterPage';
+import Test from './pages/Test';
 
 
 
@@ -17,6 +18,7 @@ function App() {
           <Route exact path="/template-minimal" element={<MinimalPage />} />
           <Route exact path="/template-smoke" element={<SmokePage />} />
           <Route exact path="/template-water" element={<WaterPage />} />
+          <Route exact path="/test" element={<Test />} />
         </Routes>
       </Router>
     </div>
