@@ -9,7 +9,7 @@ function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [menuTransition, setMenuTransition] = useState(false);
     const [hideLink, setHideLink] = useState(false);
-    const [negativeClass, setNegativeClass] = useState('text-negative')
+    const [negativeClass, setNegativeClass] = useState('text-negative-remove')
 
     let lastScrollY = window.scrollY;
 
@@ -21,6 +21,11 @@ function Navbar() {
                 document.body.style.overflow = 'auto';
             } else if (isMenuOpen){
                 document.body.style.overflow = 'hidden';
+            }
+            if (window.scrollY > 850) {
+                setNegativeClass('text-negative');
+            }else{
+                setNegativeClass('text-negative-remove');
             }
         };
         window.addEventListener('scroll', handleScroll, { passive: true });
@@ -48,21 +53,20 @@ function Navbar() {
         }, 2000);
     };
 
-
     return (
     <>
         <div className={`${negativeClass} fixed z-30 top-0 left-0 w-full transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-            <div className="flex justify-between items-center p-10">
+            <div className={`flex justify-between items-center ${negativeClass === 'text-negative-remove' ? 'text-slate-50':''} p-10`}>
                 <h2 className="uppercase font-medium text-xl">Logo</h2>
                 <div className="hidden lg:block">
                     <nav className="flex justify-end items-center">
                         <Link to="/" className="uppercase font-medium mx-6">Home</Link>
-                        <Link to="/" className="uppercase font-medium mx-6">Azienda</Link>
-                        <Link to="/" className="uppercase font-medium mx-6">Notizie</Link>
-                        <Link to="/" className="uppercase font-medium mx-6">Prodotti</Link>
-                        <Link to="/" className="uppercase font-medium mx-6">Collabora con noi</Link>
-                        <Link to="/" className="uppercase font-medium mx-6">FAQ</Link>
-                        <Link to="/" className="uppercase font-medium mx-6">Contatti</Link>
+                        <Link to="/azienda" className="uppercase font-medium mx-6">Azienda</Link>
+                        <Link to="/notizie" className="uppercase font-medium mx-6">Notizie</Link>
+                        <Link to="/prodotti" className="uppercase font-medium mx-6">Prodotti</Link>
+                        <Link to="/collabora-con-noi" className="uppercase font-medium mx-6">Collabora con noi</Link>
+                        <Link to="/faq" className="uppercase font-medium mx-6">FAQ</Link>
+                        <Link to="/contatti" className="uppercase font-medium mx-6">Contatti</Link>
                     </nav>
                 </div>
                 <div className="lg:hidden">
@@ -73,12 +77,12 @@ function Navbar() {
                         {menuTransition && (
                             <>
                                 <Link to="/" data-aos="fade-right" data-aos-duration="250" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Home</Link>
-                                <Link to="/" data-aos="fade-right" data-aos-duration="500" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Azienda</Link>
-                                <Link to="/" data-aos="fade-right" data-aos-duration="750" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Notizie</Link>
-                                <Link to="/" data-aos="fade-right" data-aos-duration="1000" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Prodotti</Link>
-                                <Link to="/" data-aos="fade-right" data-aos-duration="1250" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Collabora con noi</Link>
-                                <Link to="/" data-aos="fade-right" data-aos-duration="1500" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>FAQ</Link>
-                                <Link to="/" data-aos="fade-right" data-aos-duration="1750" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Contatti</Link>
+                                <Link to="/azienda" data-aos="fade-right" data-aos-duration="500" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Azienda</Link>
+                                <Link to="/notizie" data-aos="fade-right" data-aos-duration="750" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Notizie</Link>
+                                <Link to="/prodotti" data-aos="fade-right" data-aos-duration="1000" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Prodotti</Link>
+                                <Link to="/collabora-con-noi" data-aos="fade-right" data-aos-duration="1250" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Collabora con noi</Link>
+                                <Link to="/faq" data-aos="fade-right" data-aos-duration="1500" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>FAQ</Link>
+                                <Link to="/contatti" data-aos="fade-right" data-aos-duration="1750" className={`${hideLink ? 'link-hidden' : ''} text-slate-50 uppercase mx-6 my-2`}>Contatti</Link>
                                 <button className="absolute top-0 right-0 w-6 h-6 text-white m-10" onClick={handleMenuClose}>
                                     <IoClose className='text-3xl'/>
                                 </button>

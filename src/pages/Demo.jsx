@@ -2,19 +2,6 @@ import React, { useEffect, useRef } from 'react';
 
 function Test() {
 
-//   const cursorRef = useRef(null);
-
-//   useEffect(() => {
-//     const moveCursor = (e) => {
-//     };
-
-//     document.addEventListener("mousemove", moveCursor);
-
-//     return () => {
-//       document.removeEventListener("mousemove", moveCursor);
-//     };
-//   }, []); 
-
 
     return (
         <div>
