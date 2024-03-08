@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollParallax } from 'react-just-parallax';
 import { Link } from 'react-router-dom';
 
-function FullMinimalSection({headerImage, logoTransp, title, description, href}) {
+function FullMinimalSection({headerImage, logoTransp, title, description, href, logoPosition}) {
 
   const createMarkup = (htmlContent) => {
     return {__html: htmlContent};
@@ -18,7 +18,7 @@ function FullMinimalSection({headerImage, logoTransp, title, description, href})
               <ScrollParallax enableOnTouchDevice={true} isAbsolutelyPositioned={true} lerpEase="0.08">
                   <img  src={logoTransp}      
                         data-aos="fade-in" data-aos-duration="3000"
-                        className="absolute left-[120vh] top-[-70vh] h-[150vh] w-[150vh] object-contain"
+                        className={`absolute ${logoPosition} object-contain`}
                         alt='logo careisgold'
                      />
               </ScrollParallax>

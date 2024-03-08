@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollParallax } from 'react-just-parallax';
 import { Link } from 'react-router-dom';
 
-function Static1({headerImage, logoTransp, title, description, href}) {
+function Static1({headerImage, logoTransp, title, description, href, logoPosition}) {
 
   const createMarkup = (htmlContent) => {
     return {__html: htmlContent};
@@ -17,7 +17,7 @@ function Static1({headerImage, logoTransp, title, description, href}) {
           <div className="absolute top-0 left-0 bg-black bg-opacity-40 w-full h-full flex justify-center items-center">
                 <img  src={logoTransp}    
                   data-aos="fade-in" data-aos-duration="3000"  
-                  className="absolute left-[-40vh] top-[-30vh] w-[110vh] object-contain"
+                  className={`absolute ${logoPosition} object-contain`}
                   alt='logo careisgold'
                 />
               <div className="absolute text-start ps-15 lg:ps-96 ml-[5%]">

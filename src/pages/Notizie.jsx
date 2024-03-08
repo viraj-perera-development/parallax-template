@@ -3,7 +3,7 @@ import FullTransparentSection from '../components/FullTransparent';
 import FullMinimalSection from '../components/FullMinimalSection';
 import logoVuotoNero from '../assets/mouseFollow/logo-sfondo-nero.png';
 import logoVuotoBianco from '../assets/mouseFollow/logo-sfondo-bianco.png';
-import grano from '../assets/staticSection/grano1.png';
+import grano from '../assets/staticSection/prodotto3.png';
 import sabbia from '../assets/staticSection/grano1.png';
 import Navbar from '../components/Navbar';
 import headerImage from "../assets/staticSection/family4.jpg";

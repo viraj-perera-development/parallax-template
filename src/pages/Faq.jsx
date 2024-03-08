@@ -22,6 +22,7 @@ function Faq() {
         title='error sit voluptatem, <br/>accusantium sit.'
         description='accusantium doloremque laudantium, <br/>accusantium doloremque laudantium, totam rem aperiam,<br/> eaque totam rem aperiam, eaque'
         href='/'
+        logoPosition='left-[-40vh] top-[-30vh] w-[110vh]'
       />    
       <JustText 
         background='bg-black' 

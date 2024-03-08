@@ -8,7 +8,7 @@ import headerImage from "../assets/staticSection/app2.jpg";
 import logoTransp from '../assets/mouseFollow/CIGtrasparente.png';
 import JustText from '../components/JustText';
 import BigImage from '../components/BigImage';
-import big2 from '../assets/staticSection/gold.jpg';
+import big2 from '../assets/staticSection/prodotto4.png';
 import big1 from '../assets/staticSection/family3.jpg';
 
 
@@ -24,6 +24,7 @@ function Contatti() {
         title='omnis iste natus <br/>unde omnis iste.'
         description='laudantium, totam rem aperiam, eaque.'
         href='/'
+        logoPosition='left-[130vh] top-[30vh] w-[110vh]'
       />
       <JustText 
         background='bg-black' 

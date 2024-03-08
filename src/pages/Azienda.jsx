@@ -6,7 +6,7 @@ import diagonallyWR from '../assets/mouseFollow/diagonalley_strana_bianco.png';
 import pattern from '../assets/staticSection/forme-oro4.png';
 import acqua from '../assets/staticSection/forme-oro3.png';
 import Navbar from '../components/Navbar';
-import headerImage from "../assets/staticSection/desert1.png";
+import headerImage from "../assets/staticSection/sede_crop2.jpg";
 import logoTransp from '../assets/mouseFollow/CIGtrasparente.png';
 import JustText from '../components/JustText';
 
@@ -22,6 +22,7 @@ function Azienda() {
         title='sapien quis auctor.<br/> Nulla congue justo.'
         description='tincidunt ut sapien quis auctor. Nulla fringilla congue justo.'
         href='/'
+        logoPosition='left-[130vh] top-[30vh] w-[110vh]'
       />
       <FullTransparentSection 
         grid='grid grid-cols-1 lg:grid-cols-2'

@@ -11,6 +11,9 @@ import Prodotti from './pages/Prodotti';
 import CollaboraConNoi from './pages/CollaboraConNoi';
 import Faq from './pages/Faq';
 import Contatti from './pages/Contatti';
+import Lingotto from './singlePage/Lingotto'; 
+import Demo from './pages/Demo';
+import Demo2 from './pages/Demo2';
 
 
 
@@ -29,6 +32,9 @@ function App() {
           <Route exact path="/template-minimal" element={<MinimalPage />} />
           <Route exact path="/template-smoke" element={<SmokePage />} />
           <Route exact path="/template-water" element={<WaterPage />} />
+          <Route exact path="/lingotto" element={<Lingotto />} />
+          <Route exact path="/demo" element={<Demo />} />
+          <Route exact path="/demo2" element={<Demo2 />} />
         </Routes>
       </Router>
     </div>
