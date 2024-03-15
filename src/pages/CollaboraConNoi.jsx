@@ -11,12 +11,13 @@ import logoBianco from '../assets/staticSection/schizzi-oro3.png';
 import big1 from '../assets/staticSection/family2.jpg';
 import BigImage from '../components/BigImage';
 import JustText from '../components/JustText';
+import ZoomImg from '../components/ZoomImg';
 
 
 function CollaboraConNoi() {
 
   return (
-    <div className="">
+    <div className="" style={{"height":"500rem"}}>
       <Navbar />
       <FullMinimalSection 
         headerImage={headerImage}
@@ -75,7 +76,17 @@ function CollaboraConNoi() {
         opacity='opacity-100'
         translate='xl:translate-x-[80%]'
       />
-
+      <ZoomImg/>
+      <JustText 
+        background='bg-black' 
+        title='totam rem aperiam, eaque ipsa<br/> quae ab illo inventore' 
+        titleClass='text-5xl text-slate-50' 
+        description={`Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore  adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad <br/> reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?`}
+        descriptionClass='text-slate-50'
+        buttonClass='border border-slate-50 text-slate-50 progress-button-light'
+        buttonText='scopri di più'
+        href='/'
+      />
     </div>
   )
 }
