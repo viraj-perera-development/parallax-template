@@ -112,8 +112,8 @@ canvas {
 }
 
 .text-negative-remove {
-  color: black;
-  display: block;
+  color: black!important;
+  display: block!important;
   filter: invert(0)!important;
   mix-blend-mode: normal !important;
 }
@@ -147,3 +147,65 @@ canvas {
 .animate-image-once {
   animation: slideInFromLeftAndScale 3s forwards;
 }
+
+.arrow {
+  animation: arrowMove 2s ease-in-out infinite;
+}
+
+@keyframes arrowMove {
+  0% {
+      bottom: 2.5rem;
+  }
+  50% {
+      bottom: 4rem; /* Adjust this value as needed */
+  }
+  100% {
+      bottom: 2.5rem;
+  }
+}
+
+.animated-line {
+  width: 0;
+  animation: lineAppear 2s forwards;
+}
+
+@keyframes lineAppear {
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  animation: fadeOut 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.glassmorphism{
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  }

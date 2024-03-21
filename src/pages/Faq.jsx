@@ -1,17 +1,29 @@
-import React from 'react';
-import FullTransparentSection from '../components/FullTransparent';
-import logoVuotoNero from '../assets/mouseFollow/logo-sfondo-nero.png';
-import sabbia from '../assets/staticSection/grano1.png';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Static1 from '../components/Static1';
 import headerImage from "../assets/staticSection/forme-oro5.png";
 import logoTransp from '../assets/mouseFollow/CIGtrasparente.png';
-import JustText from '../components/JustText';
-import BigImage from '../components/BigImage';
-import big1 from '../assets/staticSection/app1.jpg';
+import { FiChevronLeft, FiChevronRight, FiSearch } from 'react-icons/fi';
+import { FiChevronDown } from 'react-icons/fi'; 
+import faqData from '../assets/json/faq.json';
+import Footer from '../components/Footer';
 
 
 function Faq() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isOpen, setIsOpen] = useState(null); // State to track which dropdown is open
+
+  // Filter FAQ items based on search query
+  const filteredFaq = faqData.filter(item =>
+    item.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    item.answer.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+  
+
+  // Function to handle toggling dropdown
+  const handleToggle = (index) => {
+    setIsOpen(isOpen === index ? null : index); // If clicked on same index, close it, otherwise open it
+  };
 
   return (
     <div className="">
@@ -23,56 +35,40 @@ function Faq() {
         description='accusantium doloremque laudantium, <br/>accusantium doloremque laudantium, totam rem aperiam,<br/> eaque totam rem aperiam, eaque'
         href='/'
         logoPosition='left-[-40vh] top-[-30vh] w-[110vh]'
-      />    
-      <JustText 
-        background='bg-black' 
-        title='totam rem aperiam, eaque ipsa<br/> quae ab illo inventore' 
-        titleClass='text-5xl text-slate-50' 
-        description={`Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore  adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad <br/> reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?`}
-        descriptionClass='text-slate-50'
-        buttonClass='border border-slate-50 text-slate-50 progress-button-light'
-        buttonText='scopri di più'
-        href='/'
-      />  
-      <BigImage
-        grid='flex'
-        background={big1}
-        text='text-slate-50'
-        button='border border-slate-50 text-slate-50 progress-button-light'
-        href='/'
-        title='Lorem ipsum'
-        description='In tincidunt ut sapien quis auctor. Nulla fringilla congue justo, nec auctor ante efficitur a. Mauris ac elit eget quam mattis pellentesque eget ut enim. Nunc mollis vehicula nisl eget sollicitudin. Vivamus luctus rhoncus pellentesque.'
-        image=''
-        opacity='opacity-100 left-0 top-[-40vh] h-[100vh] w-full md:w-[100vh]'
-        bgOpacity='bg-black opacity-65 xl:w-3/4 w-1/6'
-        translate='xl:translate-x-[10%] xl:w-1/4 w-5/6'
-        orientation='right'
       />
-      <JustText 
-        background='bg-slate-50' 
-        title='totam rem aperiam, eaque ipsa<br/> quae ab illo inventore' 
-        titleClass='text-5xl text-black' 
-        description={`Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore  adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad <br/> reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?`}
-        descriptionClass='text-black'
-        buttonClass='border border-black text-black progress-button-light'
-        buttonText='scopri di più'
-        href='/'
-      />  
-      <FullTransparentSection 
-        grid='grid grid-cols-1 lg:grid-cols-2'
-        background={sabbia}
-        text='text-slate-50'
-        button='border border-slate-50 text-slate-50 progress-button-light'
-        href='/'
-        title='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-        description='In tincidunt ut sapien quis auctor. Nulla fringilla congue justo, nec auctor ante efficitur a. Mauris ac elit eget quam mattis pellentesque eget ut enim. Nunc mollis vehicula nisl eget sollicitudin. Vivamus luctus rhoncus pellentesque.'
-        image={logoVuotoNero}
-        opacity='opacity-100 left-0 top-[-40vh] h-[100vh] w-full md:w-[100vh]'
-        bgOpacity='bg-black opacity-65'
-        translate='xl:translate-x-[10%]'
-      />
+      <div className='flex flex-col items-center justify-start flex-grow pb-20'>
+        <div className='relative mt-20 w-11/12 md:w-1/2'>
+          <input 
+            type='text' 
+            placeholder='Domande frequenti . . .' 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className=' bg-neutral-800 text-slate-50 px-4 py-2 focus:outline-none focus:border-blue-500 w-full'
+          />
+          <FiSearch className='search-icon absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-400' />
+        </div>
+        
+        <div className='mt-8 w-11/12 md:w-1/2'>
+          {filteredFaq.map((item, index) => (
+            <div key={index} className='faq-item border border-2 border-neutral-800 p-4 mb-4'>
+              <div 
+                className='faq-question text-lg font-semibold cursor-pointer text-start text-slate-100 flex justify-between align-center'
+                onClick={() => handleToggle(index)} 
+              >
+                {item.question}
+                <FiChevronRight className={`text-slate-50 transition-transform duration-300 my-auto transform ${isOpen === index ? 'rotate-90' : ''}`} />
+
+              </div>
+              {isOpen === index && ( 
+                <div className='faq-answer text-start text-slate-100 mt-6'>{item.answer}</div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+      <Footer/>
     </div>
-  )
+  );
 }
 
-export default Faq
+export default Faq;

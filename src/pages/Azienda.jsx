@@ -9,12 +9,16 @@ import Navbar from '../components/Navbar';
 import headerImage from "../assets/staticSection/sede_crop2.jpg";
 import logoTransp from '../assets/mouseFollow/CIGtrasparente.png';
 import JustText from '../components/JustText';
+import Footer from "../components/Footer";
+import image1 from '../assets/staticSection/collabora1.png'
+import image2 from '../assets/staticSection/collabora2.png'
+import FullMinimalSection from '../components/FullMinimalSection';
 
 
 function Azienda() {
 
   return (
-    <div className="">
+    <div className="" data-aos="fade-in" data-aos-duration="2000">
       <Navbar />
       <Static 
         headerImage={headerImage}
@@ -23,6 +27,29 @@ function Azienda() {
         description='tincidunt ut sapien quis auctor. Nulla fringilla congue justo.'
         href='/'
         logoPosition='left-[130vh] top-[30vh] w-[110vh]'
+      />
+      <FullTransparentSection 
+        grid='grid grid-cols-1 lg:grid-cols-2'
+        background={acqua}
+        text='text-black'
+        button='border border-black text-black progress-button-dark'
+        href='/'
+        title='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        description='In tincidunt ut sapien quis auctor. Nulla fringilla congue justo, nec auctor ante efficitur a. Mauris ac elit eget quam mattis pellentesque eget ut enim. Nunc mollis vehicula nisl eget sollicitudin. Vivamus luctus rhoncus pellentesque.'
+        image={diagonallyWR}
+        opacity='opacity-100 left-0 top-[-40vh] h-[100vh] w-full md:w-[100vh]'
+        bgOpacity='bg-white'
+        translate='xl:translate-x-[30%]'
+        backgroundColor='bg-white'
+        orientation="right"
+      />
+      <FullMinimalSection 
+        headerImage={image1}
+        logoTransp=''
+        title='auctor. Nulla, <br/>fringilla.'
+        description='Nulla fringilla congue justo, nec auctor<br/> ante efficitur a. Mauris ac elit <br/>eget quam mattis'
+        href='/azienda'
+        logoPosition='left-[-40vh] top-[-30vh] w-[110vh]'
       />
       <FullTransparentSection 
         grid='grid grid-cols-1 lg:grid-cols-2'
@@ -39,41 +66,15 @@ function Azienda() {
         backgroundColor='bg-black'
         orientation="left"
       />
-      <JustText 
-        background='bg-black' 
-        title='eum fugiat quo voluptas<br/> nulla pariatur?' 
-        titleClass='text-5xl text-slate-50' 
-        description={`Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore  adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?`}
-        descriptionClass='text-slate-50'
-        buttonClass='border border-slate-50 text-slate-50 progress-button-light'
-        buttonText='scopri di più'
-        href='/'
+            <FullMinimalSection 
+        headerImage={image2}
+        logoTransp=''
+        title='auctor. Nulla, <br/>fringilla.'
+        description='Nulla fringilla congue justo, nec auctor<br/> ante efficitur a. Mauris ac elit <br/>eget quam mattis'
+        href='/azienda'
+        logoPosition='left-[-40vh] top-[-30vh] w-[110vh]'
       />
-        <FullTransparentSection 
-          grid='grid grid-cols-1 lg:grid-cols-2'
-          background={acqua}
-          text='text-black'
-          button='border border-black text-black progress-button-dark'
-          href='/'
-          title='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-          description='In tincidunt ut sapien quis auctor. Nulla fringilla congue justo, nec auctor ante efficitur a. Mauris ac elit eget quam mattis pellentesque eget ut enim. Nunc mollis vehicula nisl eget sollicitudin. Vivamus luctus rhoncus pellentesque.'
-          image={diagonallyWR}
-          opacity='opacity-100 left-0 top-[-40vh] h-[100vh] w-full md:w-[100vh]'
-          bgOpacity='bg-white'
-          translate='xl:translate-x-[30%]'
-          backgroundColor='bg-white'
-          orientation="right"
-        />
-      <JustText 
-        background='bg-black' 
-        title='totam rem aperiam, eaque ipsa<br/> quae ab illo inventore' 
-        titleClass='text-5xl text-slate-50' 
-        description={`Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore  adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad <br/> reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?`}
-        descriptionClass='text-slate-50'
-        buttonClass='border border-slate-50 text-slate-50 progress-button-light'
-        buttonText='scopri di più'
-        href='/'
-      />
+      <Footer/>
     </div>
   )
 }

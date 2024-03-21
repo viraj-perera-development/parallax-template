@@ -14,7 +14,7 @@ import JustText from '../components/JustText';
 function Notizie() {
 
   return (
-    <div className="">
+    <div className="" data-aos="fade-in" data-aos-duration="2000">
       <Navbar />
       <FullMinimalSection 
         headerImage={headerImage}

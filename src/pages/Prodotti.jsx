@@ -11,23 +11,28 @@ import JustText from '../components/JustText';
 import AnimatedTextWord from '../components/AnimatedTextWord';
 import { Link } from 'react-router-dom';
 import AnimatedTextCharacter from '../components/AnimatedTextCharacter';
+import logoBianco from '../assets/staticSection/schizzi-oro3111.png';
+import image1 from "../assets/staticSection/prodotto3.png";
+import image2 from "../assets/staticSection/prodotto4.png";
+import FullMinimalSection from '../components/FullMinimalSection';
+import Footer from '../components/Footer';
 
 
 
 function Prodotti() {
 
   return (
-    <div className="">
+    <div className="" data-aos="fade-in" data-aos-duration="2000">
       <Navbar />
       <Static1 
         headerImage={headerImage}
         logoTransp=''
         title='unde omnis iste <br/>natus error.'
         description='doloremque laudantium, totam rem aperiam, eaque.<br/> error sit voluptatem accusantium doloremque laudantium,<br/> totam rem aperiam, eaque ipsa'
-        href='/'
+        href='/demo'
         logoPosition='left-[-40vh] top-[-30vh] w-[110vh]'
       />  
-      <section>
+      {/* <section>
         <div className='mx-auto'>
             <div className='h-dvh flex justify-center items-center'>
                 <div className={`h-screen w-full bg-black flex justify-center items-center z-20`}>
@@ -41,19 +46,46 @@ function Prodotti() {
                 </div>   
             </div>
         </div>
-    </section>
+    </section> */}
       <FullBWSection 
         background='bg-slate-50'
         text='text-black'
         button='border border-black text-black progress-button-dark'
-        href='/'
+        href='/demo2'
         title='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
         description='In tincidunt ut sapien quis auctor. Nulla fringilla congue justo, nec auctor ante efficitur a. Mauris ac elit eget quam mattis pellentesque eget ut enim. Nunc mollis vehicula nisl eget sollicitudin. Vivamus luctus rhoncus pellentesque.'
         image={logoNero}
         opacity='opacity-100'
         translate='md:translate-x-[20%]'
       />
-      <section>
+      <FullMinimalSection 
+        headerImage={image1}
+        logoTransp=''
+        title='auctor. Nulla, <br/>fringilla.'
+        description='Nulla fringilla congue justo, nec auctor<br/> ante efficitur a. Mauris ac elit <br/>eget quam mattis'
+        href='/azienda'
+        logoPosition='left-[-40vh] top-[-30vh] w-[110vh]'
+      />
+      <FullBWSection 
+        background='bg-black'
+        text='text-slate-50'
+        button='border border-slate-50 text-slate-50 progress-button-light'
+        href='/'
+        title='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        description='In tincidunt ut sapien quis auctor. Nulla fringilla congue justo, nec auctor ante efficitur a. Mauris ac elit eget quam mattis pellentesque eget ut enim. Nunc mollis vehicula nisl eget sollicitudin. Vivamus luctus rhoncus pellentesque.'
+        image={logoBianco}
+        opacity='opacity-100'
+        translate='xl:translate-x-[80%]'
+      />
+      <FullMinimalSection 
+        headerImage={image2}
+        logoTransp=''
+        title='auctor. Nulla, <br/>fringilla.'
+        description='Nulla fringilla congue justo, nec auctor<br/> ante efficitur a. Mauris ac elit <br/>eget quam mattis'
+        href='/azienda'
+        logoPosition='left-[-40vh] top-[-30vh] w-[110vh]'
+      />
+      {/* <section>
         <div className='mx-auto'>
             <div className='h-dvh flex justify-center items-center'>
                 <div className={`h-screen w-full bg-black flex justify-center items-center z-20`}>
@@ -81,7 +113,8 @@ function Prodotti() {
         bgOpacity='bg-black opacity-65 xl:w-3/4 w-1/6'
         translate='xl:translate-x-[10%] xl:w-1/4 w-5/6'
         orientation='right'
-      />
+      /> */}
+      <Footer/>
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { IoClose } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
 import caveaux from '../assets/minimalSection/cassaforte.jpg'
+import logo from "../assets/logo/logo1.png";
 
 function Navbar() {
     const [isVisible, setIsVisible] = useState(true);
@@ -55,9 +56,15 @@ function Navbar() {
 
     return (
     <>
+        <div className={`text-negative-remove fixed z-30 top-0 left-0 w-full transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+            <div className={`flex justify-between items-center ${negativeClass === 'text-negative-remove' ? 'text-slate-50':''} p-10`}>
+            <img src={logo} alt="logo" className='w-32'/>
+            </div>
+        </div>
         <div className={`${negativeClass} fixed z-30 top-0 left-0 w-full transition-transform duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
             <div className={`flex justify-between items-center ${negativeClass === 'text-negative-remove' ? 'text-slate-50':''} p-10`}>
-                <h2 className="uppercase font-medium text-xl">Logo</h2>
+                <h2 className="uppercase font-medium text-xl"></h2>
+                {/* <img src={logo} alt="logo" className='w-32 text-negative-remove'/> */}
                 <div className="hidden lg:block">
                     <nav className="flex justify-end items-center">
                         <Link to="/" className="uppercase font-medium mx-6">Home</Link>

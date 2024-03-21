@@ -16,10 +16,10 @@ function FulltransparentSection({orientation, background, text, button, href, ti
                 <div className={`w-full h-full ${grid}`}>
                     <div className={`relative overflow-hidden flex justify-start items-center ${bgOpacity}`}>
                         <ScrollParallax enableOnTouchDevice={true} lerpEase="0.05" className="absolute inset-0">
-                            <img src={background} className="h-full w-full object-cover pe-1" alt="background" style={{ transform: 'scale(1.2)' }} />
+                            <img src={background} className="h-full w-full object-cover" alt="background" style={{ transform: 'scale(1.2)' }} />
                         </ScrollParallax>
                         {image !== '' ? 
-                            <img src={image} className="absolute h-full w-full object-cover" alt="foreground" />
+                            <img src={image} className="absolute h-full w-full object-cover" style={{"right":"-1px"}} alt="foreground" />
                         : ''}
                     </div>
                     <div className={`flex flex-col justify-center items-start px-4 md:px-8 lg:px-52 text-left z-10 ${translate}`}>
@@ -44,7 +44,7 @@ function FulltransparentSection({orientation, background, text, button, href, ti
                             <img src={background} className="h-full w-full object-cover pe-1" alt="background" style={{ transform: 'scale(1.2)' }}/>
                         </ScrollParallax>
                         {image !== '' ? 
-                            <img src={image} className="absolute h-full w-full object-cover" alt="foreground" />
+                            <img src={image} className="absolute h-full w-full object-cover" style={{"left":"-1px"}} alt="foreground" />
                         : ''}
                     </div>
                 </div>

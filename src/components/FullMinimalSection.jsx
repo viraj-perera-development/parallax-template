@@ -12,7 +12,7 @@ function FullMinimalSection({headerImage, logoTransp, title, description, href, 
     <>
       <div className='relative z-20 h-dvh overflow-hidden'>
           <ScrollParallax enableOnTouchDevice={true} isAbsolutelyPositioned={true} lerpEase="0.05">
-              <img src={headerImage} data-aos="fade-in" data-aos-duration="2000" alt='header image' className="absolute top-0 left-0 w-full h-full object-cover" style={{ transform: 'scale(1.2)' }} />
+              <img src={headerImage} alt='header image' className="absolute top-0 left-0 w-full h-full object-cover" style={{ transform: 'scale(1.2)' }} />
           </ScrollParallax>
           <div className="absolute top-0 left-0 bg-black bg-opacity-40 w-full h-full flex justify-center items-center">
               <ScrollParallax enableOnTouchDevice={true} isAbsolutelyPositioned={true} lerpEase="0.08">

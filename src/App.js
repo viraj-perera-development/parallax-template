@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/HomePage';
@@ -14,13 +14,26 @@ import Contatti from './pages/Contatti';
 import Lingotto from './singlePage/Lingotto'; 
 import Demo from './pages/Demo';
 import Demo2 from './pages/Demo2';
+import { useLocation } from 'react-router-dom';
 
+function ScrollToTop() {
+  const location = useLocation();
 
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scroll to top when route changes
+  }, [location.pathname]); // Listen for changes in location.pathname
+
+  return null;
+}
 
 function App() {
+
+
+
   return (
     <div className="App">
       <Router>
+      <ScrollToTop /> {/* Add ScrollToTop component here */}
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route exact path="/azienda" element={<Azienda />} />
