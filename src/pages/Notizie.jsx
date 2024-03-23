@@ -1,78 +1,178 @@
-import React from 'react';
-import FullTransparentSection from '../components/FullTransparent';
-import FullMinimalSection from '../components/FullMinimalSection';
-import logoVuotoNero from '../assets/mouseFollow/logo-sfondo-nero.png';
-import logoVuotoBianco from '../assets/mouseFollow/logo-sfondo-bianco.png';
-import grano from '../assets/staticSection/prodotto3.png';
-import sabbia from '../assets/staticSection/grano1.png';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
-import headerImage from "../assets/staticSection/family4.jpg";
-import logoTransp from '../assets/mouseFollow/CIGtrasparente.png';
-import JustText from '../components/JustText';
+import Static1 from '../components/Static1';
+import headerImage from "../assets/staticSection/prodotto3.png";
+import { FiSearch } from 'react-icons/fi';
+import Footer from '../components/Footer';
+import { IoFilterOutline } from 'react-icons/io5';
+import { GiNewspaper } from "react-icons/gi";
+import axios from 'axios';
+import { IoCheckmarkOutline } from "react-icons/io5";
 
 
 function Notizie() {
+  const filterOptions = ['Tutti', 'Recenti', 'Più Popolari', 'Più Condivisi'];
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isOpen, setIsOpen] = useState(null); // State to track which dropdown is open
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [posts1, setPosts1] = useState([]);
+  const [visiblePosts, setVisiblePosts] = useState(6);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [filteredCategories, setFilteredCategories] = useState(posts);
+  const [selectedSubOption, setSelectedSubOption] = useState(0); // Default selected sub option
+  const [filteredOptions, setFilteredOptions] = useState(filterOptions);
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`https://crm.careholding.it/ws/Call/?Cat=Blog&met=GetPostsBlog&np=0`);
+        setPosts(res.data);
+        setFilteredPosts([...res.data].sort((a, b) => new Date(b.Ordine) - new Date(a.Ordine)));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.post(`https://crm.careholding.it/ws/Call/?Cat=Blog&met=GetPostsRS&np=0`);
+        setPosts1(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    // Filter posts based on search query
+    const filtered = filteredPosts.filter(post => {
+      return post.Titolo.toLowerCase().includes(searchQuery.toLowerCase()) ||
+             post.Subtitle.toLowerCase().includes(searchQuery.toLowerCase());
+    });
+    setFilteredPosts(filtered);
+
+  }, [searchQuery, posts]);
+
+  const handleFilterClick = () => {
+    setShowFilterDropdown(!showFilterDropdown);
+  };
+
+  const handleOptionSelect = (option) => {
+
+    if(option === 'Tutti'){
+      setFilteredPosts(posts);
+    }else if(option === 'Recenti'){
+      setFilteredPosts([...filteredPosts].sort((a, b) => new Date(b.DataInserimento) - new Date(a.DataInserimento)));
+    }else if(option === 'Più Popolari'){
+      setFilteredPosts([...filteredPosts].sort((a, b) => new Date(b.Rel) - new Date(a.Rel)));
+    }else if(option === 'Più Condivisi'){
+      setFilteredPosts([...filteredPosts].sort((a, b) => new Date(b.Share) - new Date(a.Share)));
+    }
+
+    setShowFilterDropdown(false);
+  };
+
+  const handleSubOptionSelect = (option) => {
+    setSelectedSubOption(option);
+    if(option === 0){
+      setSelectedSubOption(0);
+      setFilteredOptions(filterOptions);
+    }else if(option === 1){
+      setSelectedSubOption(1);
+      const uniqueCategories = [...new Set(posts1.map(post => post.CategoryName))];
+      setFilteredOptions(uniqueCategories);
+      setFilteredPosts(posts1)
+    }
+  };
+
+
 
   return (
-    <div className="" data-aos="fade-in" data-aos-duration="2000">
+    <div className="">
       <Navbar />
-      <FullMinimalSection 
+      <Static1 
         headerImage={headerImage}
         logoTransp=''
-        title='ut sapien auctor. <br/>Nulla fringilla.'
-        description='Mauris ac elit eget quam mattis<br/> pellentesque eget ut enim. Nunc mollis <br/>vehicula nisl eget sollicitudin.'
+        title='error sit voluptatem, <br/>accusantium sit.'
+        description='accusantium doloremque laudantium, <br/>accusantium doloremque laudantium, totam rem aperiam,<br/> eaque totam rem aperiam, eaque'
         href='/'
+        logoPosition='left-[-40vh] top-[-30vh] w-[110vh]'
       />
-      <FullTransparentSection 
-        grid='grid grid-cols-1 lg:grid-cols-2'
-        background={sabbia}
-        text='text-slate-50'
-        button='border border-slate-50 text-slate-50 progress-button-light'
-        href='/'
-        title='Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-        description='In tincidunt ut sapien quis auctor. Nulla fringilla congue justo, nec auctor ante efficitur a. Mauris ac elit eget quam mattis pellentesque eget ut enim. Nunc mollis vehicula nisl eget sollicitudin. Vivamus luctus rhoncus pellentesque.'
-        image={logoVuotoNero}
-        opacity='opacity-100 left-0 top-[-40vh] h-[100vh] w-full md:w-[100vh]'
-        bgOpacity='bg-black opacity-65'
-        translate='xl:translate-x-[10%]'
-      />
-      <JustText 
-        background='bg-slate-50' 
-        title='totam rem aperiam, eaque ipsa<br/> quae ab illo inventore' 
-        titleClass='text-5xl text-black' 
-        description={`Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore  adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad <br/> reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?`}
-        descriptionClass='text-black'
-        buttonClass='border border-black text-black progress-button-dark'
-        buttonText='scopri di più'
-        href='/'
-      />
-      <FullTransparentSection 
-        grid='grid grid-cols-1 lg:grid-cols-2'
-        background={grano}
-        text='text-slate-50'
-        button='border border-slate-50 text-slate-50 progress-button-light'
-        href='/'
-        title='Lorem ipsum dolor elit.'
-        description='In tincidunt ut sapien quis auctor. Nulla fringilla congue justo, nec auctor ante efficitur a. Mauris ac elit eget quam mattis pellentesque eget ut enim. Nunc mollis vehicula nisl eget sollicitudin. Vivamus luctus rhoncus pellentesque.'
-        image=''
-        opacity='opacity-100 left-0 top-[-40vh] h-[100vh] w-full md:w-[100vh]'
-        bgOpacity='bg-black opacity-65'
-        translate='xl:translate-x-[-10%]'
-        backgroundColor='bg-black	'
-        orientation="left"
-      />
-      <JustText 
-        background='bg-black' 
-        title='totam rem aperiam, eaque ipsa<br/> quae ab illo inventore' 
-        titleClass='text-5xl text-slate-50' 
-        description={`Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore  adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad <br/> reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?`}
-        descriptionClass='text-slate-50'
-        buttonClass='border border-slate-50 text-slate-50 progress-button-dark'
-        buttonText='scopri di più'
-        href='/'
-      />
+      <div className='flex flex-col items-center justify-start flex-grow pb-20'>
+        <div className='relative mt-20 w-11/12 md:w-1/2'>
+          <IoFilterOutline className='search-icon absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400' onClick={handleFilterClick}/>
+          {showFilterDropdown && (
+            <div className='absolute z-40 text-start mt-10 w-full bg-slate-50 shadow-md fadeIn'>
+                <div
+                className={`flex py-2 px-4 cursor-pointer border-b-[0.5px] border-b-slate-300 text-black bg-gray-200`}
+                onClick={() => handleSubOptionSelect(0)}
+              >
+                Approfondimenti {selectedSubOption === 0 ? <IoCheckmarkOutline className='text-green-700 text-xl ms-2' /> : ''}
+              </div>
+              <div
+                className={`flex py-2 px-4 cursor-pointer border-b-[0.5px] border-b-slate-300 text-black bg-gray-200`}
+                onClick={() => handleSubOptionSelect(1)}
+              >
+                Rassegna Stampa {selectedSubOption === 1 ? <IoCheckmarkOutline className='text-green-700 text-xl ms-2' /> : ''}
+              </div>
+
+              {filteredOptions.map((option) => (
+                <div
+                  key={option}
+                  className='py-2 px-4 cursor-pointer border-b-[0.5px]  text-black hover:bg-black hover:text-slate-50'
+                  onClick={() => handleOptionSelect(option)}
+                >
+                  {option}
+                </div>
+              ))}
+            </div>
+          )}
+          <input 
+            type='text' 
+            placeholder='Cerca . . .' 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className='bg-neutral-800 text-slate-50 px-12 py-2 pl-12 focus:outline-none focus:border-blue-500 w-full rounded-lg'
+          />
+          <FiSearch className='search-icon absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400' />
+        </div>
+        
+        <div className='mt-8 w-11/12 md:w-1/2'>
+        {filteredPosts.slice(0, visiblePosts).map(post => {
+            if (post.Stato === 1){
+              return(
+                <div key={post.Id} className='faq-item border-b-[0.5px]  border-neutral-800 p-4 mb-4'>
+                <div className="flex justify-start text-start">
+                  <div className="max-w-md rounded-lg shadow-lg">
+                    <div className="flex items- justify-start my-14">
+                    {/* <GiNewspaper className='search-icon text-slate-50 text-2xl w-full' /> */}
+                      <div className='ms-10'>
+                        <h2 className="text-lg font-semibold text-slate-50">{post.Titolo}</h2>
+                        <p className="text-sm mt-2 text-slate-50">{post.Subtitle}</p>
+                        <button className="mt-5 px-8 py-2 uppercase border border-slate-50 text-slate-50 progress-button-light transition duration-300 ease-in-out">Leggi di più</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              )
+            }
+          }
+          )}
+
+        </div>
+      </div>
+      <Footer/>
     </div>
-  )
+  );
 }
 
-export default Notizie
+export default Notizie;
