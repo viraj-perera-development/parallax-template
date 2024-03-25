@@ -8,6 +8,7 @@ import { IoFilterOutline } from 'react-icons/io5';
 import { GiNewspaper } from "react-icons/gi";
 import axios from 'axios';
 import { IoCheckmarkOutline } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 
 
 function Notizie() {
@@ -23,13 +24,14 @@ function Notizie() {
   const [filteredCategories, setFilteredCategories] = useState(posts);
   const [selectedSubOption, setSelectedSubOption] = useState(0); // Default selected sub option
   const [filteredOptions, setFilteredOptions] = useState(filterOptions);
+  const [prevSearchQuery, setPrevSearchQuery] = useState([]);
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`https://crm.careholding.it/ws/Call/?Cat=Blog&met=GetPostsBlog&np=0`);
-        setPosts(res.data);
+        setPosts([...res.data].sort((a, b) => new Date(b.Ordine) - new Date(a.Ordine)));
         setFilteredPosts([...res.data].sort((a, b) => new Date(b.Ordine) - new Date(a.Ordine)));
       } catch (err) {
         console.log(err);
@@ -42,7 +44,7 @@ function Notizie() {
     const fetchData = async () => {
       try {
         const res = await axios.post(`https://crm.careholding.it/ws/Call/?Cat=Blog&met=GetPostsRS&np=0`);
-        setPosts1(res.data);
+        setPosts1([...res.data].sort((a, b) => new Date(b.Ordine) - new Date(a.Ordine)));
       } catch (err) {
         console.log(err);
       }
@@ -50,30 +52,69 @@ function Notizie() {
     fetchData();
   }, []);
 
+  // useEffect(() => {
+  //   // Filter posts based on search query
+  //   const filtered = filteredPosts.filter(post => {
+  //     return post.Titolo.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //            post.Subtitle.toLowerCase().includes(searchQuery.toLowerCase());
+  //   });
+  //   setFilteredPosts(filtered);
+
+  // }, [searchQuery, posts]);
+
   useEffect(() => {
     // Filter posts based on search query
-    const filtered = filteredPosts.filter(post => {
+    const filtered = selectedSubOption === 0 ? posts.filter(post => {
+      return post.Titolo.toLowerCase().includes(searchQuery.toLowerCase()) ||
+             post.Subtitle.toLowerCase().includes(searchQuery.toLowerCase());
+    }) : posts1.filter(post => {
       return post.Titolo.toLowerCase().includes(searchQuery.toLowerCase()) ||
              post.Subtitle.toLowerCase().includes(searchQuery.toLowerCase());
     });
-    setFilteredPosts(filtered);
+  
+    // If search query is empty and no sub-option is selected, restore original posts
+    if (searchQuery.trim() === '' && selectedSubOption === 0) {
+      // setFilteredPosts(posts);
+    } else if (searchQuery.trim() === '' && selectedSubOption === 1) {
+      // setFilteredPosts(posts1);
+    } else {
+      // Check if the current search query is shorter than the previous one
+      if (searchQuery.length < prevSearchQuery.length) {
+        // Restore the filtered posts progressively as the user deletes characters
+        const restored = filteredPosts.filter(post => {
+          return post.Titolo.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                 post.Subtitle.toLowerCase().includes(searchQuery.toLowerCase());
+        });
+        setFilteredPosts(restored);
+      } else {
+        setFilteredPosts(filtered);
+      }
+    }
+    
+    // Update previous search query
+    setPrevSearchQuery(searchQuery);
+  }, [searchQuery, posts, prevSearchQuery, filteredPosts, selectedSubOption, posts1]);
 
-  }, [searchQuery, posts]);
-
+  
   const handleFilterClick = () => {
     setShowFilterDropdown(!showFilterDropdown);
   };
 
   const handleOptionSelect = (option) => {
 
-    if(option === 'Tutti'){
+    if(option === 'Tutti' && selectedSubOption === 0){
       setFilteredPosts(posts);
+    }else if(option === 'Tutti' && selectedSubOption === 1){
+      setFilteredPosts(posts1);
     }else if(option === 'Recenti'){
       setFilteredPosts([...filteredPosts].sort((a, b) => new Date(b.DataInserimento) - new Date(a.DataInserimento)));
     }else if(option === 'Più Popolari'){
       setFilteredPosts([...filteredPosts].sort((a, b) => new Date(b.Rel) - new Date(a.Rel)));
     }else if(option === 'Più Condivisi'){
       setFilteredPosts([...filteredPosts].sort((a, b) => new Date(b.Share) - new Date(a.Share)));
+    }else if(selectedSubOption === 1 && option !== 'Tutti'){
+      const filtered = posts1.filter((post) => post.CategoryName === option);
+      setFilteredPosts(filtered);
     }
 
     setShowFilterDropdown(false);
@@ -84,14 +125,32 @@ function Notizie() {
     if(option === 0){
       setSelectedSubOption(0);
       setFilteredOptions(filterOptions);
+      setFilteredPosts(posts);
     }else if(option === 1){
       setSelectedSubOption(1);
       const uniqueCategories = [...new Set(posts1.map(post => post.CategoryName))];
-      setFilteredOptions(uniqueCategories);
-      setFilteredPosts(posts1)
+      const uniqueCategoriesWithTutti = ['Tutti', ...uniqueCategories];
+      setFilteredOptions(uniqueCategoriesWithTutti);
+      setFilteredPosts(posts1);
     }
   };
 
+  function formatToUrlFriendly(text) {
+    const cleanedText = text
+      .toLowerCase() // Convert to lowercase
+      .replace(/ /g, '-') // Replace spaces with hyphens
+      .replace(/[àáâãäå]/g, 'a') // Replace "à", "á", "â", "ã", "ä", "å" with "a"
+      .replace(/[èéêë]/g, 'e') // Replace "è", "é", "ê", "ë" with "e"
+      .replace(/[ìíîï]/g, 'i') // Replace "ì", "í", "î", "ï" with "i"
+      .replace(/[òóôõö]/g, 'o') // Replace "ò", "ó", "ô", "õ", "ö" with "o"
+      .replace(/[ùúûü]/g, 'u') // Replace "ù", "ú", "û", "ü" with "u"
+      .replace(/[^a-z0-9-_+]/g, '-') // Remove special characters except hyphens and alphanumeric characters
+      .replace(/-{2,}/g, '-'); // Remove consecutive hyphens
+
+        if (cleanedText.endsWith('-')) {
+            return cleanedText.slice(0, -1);  
+    }return cleanedText;
+  }
 
 
   return (
@@ -144,28 +203,25 @@ function Notizie() {
           <FiSearch className='search-icon absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400' />
         </div>
         
-        <div className='mt-8 w-11/12 md:w-1/2'>
+        <div className='mt-16 w-11/12 md:w-7/12'>
         {filteredPosts.slice(0, visiblePosts).map(post => {
-            if (post.Stato === 1){
-              return(
-                <div key={post.Id} className='faq-item border-b-[0.5px]  border-neutral-800 p-4 mb-4'>
-                <div className="flex justify-start text-start">
-                  <div className="max-w-md rounded-lg shadow-lg">
-                    <div className="flex items- justify-start my-14">
-                    {/* <GiNewspaper className='search-icon text-slate-50 text-2xl w-full' /> */}
-                      <div className='ms-10'>
-                        <h2 className="text-lg font-semibold text-slate-50">{post.Titolo}</h2>
-                        <p className="text-sm mt-2 text-slate-50">{post.Subtitle}</p>
-                        <button className="mt-5 px-8 py-2 uppercase border border-slate-50 text-slate-50 progress-button-light transition duration-300 ease-in-out">Leggi di più</button>
-                      </div>
+              if (post.Stato === 1){
+                return(
+                <div key={post.Id} className='faq-item border-b-[0.5px] border-neutral-800 p-4 mb-4'>
+                  <div className="flex items-center justify-start text-start grayscale hover:grayscale-0 transition duration-1000 ease-in-out">
+                    <div className="max-w-md flex-shrink-0">
+                      <img src={post.ImgCopertina} alt="Image" className="rounded-lg shadow-lg" />
+                    </div>
+                    <div className="mx-20">
+                      <h2 className="font-semibold text-slate-50 uppercase text-2xl">{post.Titolo}</h2>
+                      <p className="text-md mt-2 text-slate-50 mb-6">{post.Subtitle}</p>
+                      <Link to={`/notizie/${selectedSubOption === 0 ? 'approfondimenti' : 'rassegna-stampa'}/${post.Id}/${formatToUrlFriendly(post.Metatitle)}`} className="px-8 py-2 uppercase border border-slate-50 text-slate-50 progress-button-light transition duration-300 ease-in-out">Leggi di più</Link>
                     </div>
                   </div>
                 </div>
-              </div>
-  
-              )
+                )
+              }
             }
-          }
           )}
 
         </div>
