@@ -19,6 +19,18 @@ const SmoothScroll = () => {
   
     });
 
+    const handleLinkClick = (event) => {
+      // Check if the clicked element is an anchor link
+      if (event.target.tagName === 'A') {
+        // Prevent default anchor behavior
+        event.preventDefault();
+        
+        // Scroll to top
+        lenis.scrollTo(0);
+      }
+    };
+
+
     lenis.on('scroll', (e) => {
     //   console.log(e);
     });
@@ -29,10 +41,13 @@ const SmoothScroll = () => {
     };
 
     requestAnimationFrame(raf);
+    document.addEventListener('click', handleLinkClick);
 
     return () => {
       // Clean up
       lenis.destroy();
+      document.removeEventListener('click', handleLinkClick);
+
     };
   }, []); // Run only once on component mount
 

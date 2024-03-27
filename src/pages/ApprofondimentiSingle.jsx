@@ -94,27 +94,6 @@ const Single = () => {
       }
     }
   }, [postNew.Testo]);
-
-
-  function formatToUrlFriendly(text) {
-    if (!text) {
-      return ''; // Return an empty string or handle the case accordingly
-  }
-    const cleanedText = text
-      .toLowerCase() // Convert to lowercase
-      .replace(/ /g, '-') // Replace spaces with hyphens
-      .replace(/[àáâãäå]/g, 'a') // Replace "à", "á", "â", "ã", "ä", "å" with "a"
-      .replace(/[èéêë]/g, 'e') // Replace "è", "é", "ê", "ë" with "e"
-      .replace(/[ìíîï]/g, 'i') // Replace "ì", "í", "î", "ï" with "i"
-      .replace(/[òóôõö]/g, 'o') // Replace "ò", "ó", "ô", "õ", "ö" with "o"
-      .replace(/[ùúûü]/g, 'u') // Replace "ù", "ú", "û", "ü" with "u"
-      .replace(/[^a-z0-9-_+]/g, '-') // Remove special characters except hyphens and alphanumeric characters
-      .replace(/-{2,}/g, '-'); // Remove consecutive hyphens
-
-        if (cleanedText.endsWith('-')) {
-            return cleanedText.slice(0, -1);  
-    }return cleanedText;
-  }
       
 
   const nextSectionRef = useRef(null);
@@ -137,11 +116,11 @@ const Single = () => {
 
         <meta property="og:title" content={postNew.Metatitle} />
         <meta property="og:description" content={postNew.Metadescription} />
-        <meta property="og:url" content={`https://careisgold.it/notizie/approfondimenti/${postNew.Id}/${formatToUrlFriendly(postNew.Metatitle)}`} />
+        <meta property="og:url" content={`https://careisgold.it/notizie/${postNew.RewriteUrl}`} />
         <meta property="og:type" content="article" />
         <meta name="author" content="careisgold s.p.a" />
 
-        <link rel="canonical" href={`https://careisgold.it/notizie/approfondimenti/${postNew.Id}/${formatToUrlFriendly(postNew.Metatitle)}`} />
+        <link rel="canonical" href={`https://careisgold.it/notizie/${postNew.RewriteUrl}`} />
 
         <script type="application/ld+json">
           {JSON.stringify({
@@ -150,7 +129,7 @@ const Single = () => {
             "headline": postNew.Metatitle,
             "description": postNew.Metadescription,
             "image": postNew.ImgCopertina,
-            "url": `https://careisgold.it/notizie/approfondimenti/${postNew.Id}/${formatToUrlFriendly(postNew.Metatitle)}`,
+            "url": `https://careisgold.it/notizie/${postNew.RewriteUrl}`,
             "datePublished": postNew.DataInserimento,
             "dateModified": postNew.DataModifica,
             "author": {
@@ -187,10 +166,7 @@ const Single = () => {
           </div>
       </div>
       <section className="relative" ref={nextSectionRef}>
-          <div className="h-full flex justify-end items-center">
-            <div className="hidden sm:block sm:w-1/4 fixed top-0 left-0 z-0" style={{"height":"100vh"}}>
-              <img src={postNew.ImgHeader} alt={postNew.Titolo} className="w-full h-full object-cover opacity-60" />
-            </div>            
+          <div className="h-full flex justify-center items-center">
             <div className="w-full sm:w-3/4 text-slate-50 flex flex-col justify-center items-center p-4 pt-36 z-20">
               <div className="text-left w-full mx-auto md:w-9/12 text-content">
                 <h1 className="text-4xl font-semibold uppercase mb-2" data-aos="fade-up" data-aos-duration="900">{postNew.Titolo}</h1>

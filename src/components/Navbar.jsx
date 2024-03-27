@@ -10,7 +10,7 @@ function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [menuTransition, setMenuTransition] = useState(false);
     const [hideLink, setHideLink] = useState(false);
-    const [negativeClass, setNegativeClass] = useState('text-negative-remove')
+    const [negativeClass, setNegativeClass] = useState('text-negative-remove');
 
     let lastScrollY = window.scrollY;
 

@@ -16,18 +16,8 @@ import Demo from './pages/Demo';
 import Demo2 from './pages/Demo2';
 import Approfondimenti from './pages/ApprofondimentiSingle';
 import RassegnaStampa from './pages/RassegnaStampaSingle';
-import { useLocation } from 'react-router-dom';
 import axios from "axios";
 
-function ScrollToTop() {
-  const location = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0); // Scroll to top when route changes
-  }, [location.pathname]); // Listen for changes in location.pathname
-
-  return null;
-}
 
 function App() {
 
@@ -68,7 +58,6 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <ScrollToTop /> {/* Add ScrollToTop component here */}
         <Routes>
           <Route exact path="/" element={<HomePage />} />
           <Route exact path="/azienda" element={<Azienda />} />

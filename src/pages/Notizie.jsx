@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Static1 from '../components/Static1';
 import headerImage from "../assets/staticSection/prodotto3.png";
 import { FiSearch } from 'react-icons/fi';
 import Footer from '../components/Footer';
-import { IoFilterOutline } from 'react-icons/io5';
+import { IoCloseCircle, IoFilterOutline } from 'react-icons/io5';
 import { GiNewspaper } from "react-icons/gi";
 import axios from 'axios';
 import { IoCheckmarkOutline } from "react-icons/io5";
@@ -12,17 +12,14 @@ import { Link } from 'react-router-dom';
 
 
 function Notizie() {
-  const filterOptions = ['Tutti', 'Recenti', 'Più Popolari', 'Più Condivisi'];
+  const filterOptions = ['Recenti', 'Più Popolari', 'Più Condivisi'];
   const [searchQuery, setSearchQuery] = useState('');
-  const [isOpen, setIsOpen] = useState(null); // State to track which dropdown is open
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
   const [posts, setPosts] = useState([]);
   const [posts1, setPosts1] = useState([]);
   const [visiblePosts, setVisiblePosts] = useState(6);
   const [filteredPosts, setFilteredPosts] = useState([]);
-  const [filteredCategories, setFilteredCategories] = useState(posts);
-  const [selectedSubOption, setSelectedSubOption] = useState(0); // Default selected sub option
+  const [selectedSubOption, setSelectedSubOption] = useState(0); 
   const [filteredOptions, setFilteredOptions] = useState(filterOptions);
   const [prevSearchQuery, setPrevSearchQuery] = useState([]);
 
@@ -51,16 +48,6 @@ function Notizie() {
     };
     fetchData();
   }, []);
-
-  // useEffect(() => {
-  //   // Filter posts based on search query
-  //   const filtered = filteredPosts.filter(post => {
-  //     return post.Titolo.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //            post.Subtitle.toLowerCase().includes(searchQuery.toLowerCase());
-  //   });
-  //   setFilteredPosts(filtered);
-
-  // }, [searchQuery, posts]);
 
   useEffect(() => {
     // Filter posts based on search query
@@ -97,14 +84,12 @@ function Notizie() {
 
   
   const handleFilterClick = () => {
-    setShowFilterDropdown(!showFilterDropdown);
+      setShowFilterDropdown(!showFilterDropdown);
   };
 
   const handleOptionSelect = (option) => {
 
-    if(option === 'Tutti' && selectedSubOption === 0){
-      setFilteredPosts(posts);
-    }else if(option === 'Tutti' && selectedSubOption === 1){
+    if(option === 'Tutti' && selectedSubOption === 1){
       setFilteredPosts(posts1);
     }else if(option === 'Recenti'){
       setFilteredPosts([...filteredPosts].sort((a, b) => new Date(b.DataInserimento) - new Date(a.DataInserimento)));
@@ -119,6 +104,7 @@ function Notizie() {
 
     setShowFilterDropdown(false);
   };
+
 
   const handleSubOptionSelect = (option) => {
     setSelectedSubOption(option);
@@ -152,6 +138,11 @@ function Notizie() {
     }return cleanedText;
   }
 
+  const showMore = () => {
+    setVisiblePosts(visiblePosts + 3);
+  }
+
+  
 
   return (
     <div className="">
@@ -166,7 +157,11 @@ function Notizie() {
       />
       <div className='flex flex-col items-center justify-start flex-grow pb-20'>
         <div className='relative mt-20 w-11/12 md:w-1/2'>
+          {showFilterDropdown ?  
+          <IoCloseCircle  className='search-icon absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400' onClick={handleFilterClick}/> 
+          : 
           <IoFilterOutline className='search-icon absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400' onClick={handleFilterClick}/>
+          }
           {showFilterDropdown && (
             <div className='absolute z-40 text-start mt-10 w-full bg-slate-50 shadow-md fadeIn'>
                 <div
@@ -204,26 +199,29 @@ function Notizie() {
         </div>
         
         <div className='mt-16 w-11/12 md:w-7/12'>
-        {filteredPosts.slice(0, visiblePosts).map(post => {
+          {filteredPosts.slice(0, visiblePosts).map(post => {
               if (post.Stato === 1){
                 return(
                 <div key={post.Id} className='faq-item border-b-[0.5px] border-neutral-800 p-4 mb-4'>
-                  <div className="flex items-center justify-start text-start grayscale hover:grayscale-0 transition duration-1000 ease-in-out">
-                    <div className="max-w-md flex-shrink-0">
-                      <img src={post.ImgCopertina} alt="Image" className="rounded-lg shadow-lg" />
+                  <Link to={`/notizie/${post.RewriteUrl}`}>
+                    <div className="flex items-center justify-start text-start grayscale-[80%] hover:grayscale-0 transition duration-1000 ease-in-out">
+                      <div className="max-w-md flex-shrink-0 overflow-hidden">
+                        <img src={post.ImgCopertina} alt="Image" className="shadow-lg transition-transform duration-1000 transform hover:scale-105" />
+                      </div>
+                      <div className="mx-20">
+                        <h2 className="font-semibold text-slate-50 uppercase text-2xl">{post.Titolo}</h2>
+                        <p className="text-md mt-2 text-slate-50 mb-6">{post.Subtitle}</p>
+
+                        <a className="px-8 py-2 uppercase border border-slate-50 text-slate-50 progress-button-light transition duration-300 ease-in-out">Leggi di più</a>
+                      </div>
                     </div>
-                    <div className="mx-20">
-                      <h2 className="font-semibold text-slate-50 uppercase text-2xl">{post.Titolo}</h2>
-                      <p className="text-md mt-2 text-slate-50 mb-6">{post.Subtitle}</p>
-                      <Link to={`/notizie/${selectedSubOption === 0 ? 'approfondimenti' : 'rassegna-stampa'}/${post.Id}/${formatToUrlFriendly(post.Metatitle)}`} className="px-8 py-2 uppercase border border-slate-50 text-slate-50 progress-button-light transition duration-300 ease-in-out">Leggi di più</Link>
-                    </div>
-                  </div>
+                  </Link>
                 </div>
                 )
               }
             }
           )}
-
+          {filteredPosts.length === visiblePosts ? <></> : <button onClick={showMore} className={`text-slate-300 mt-16`}>Mostra di più . . .</button>}
         </div>
       </div>
       <Footer/>

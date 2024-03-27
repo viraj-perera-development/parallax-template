@@ -13,6 +13,7 @@ import image1 from "../assets/staticSection/sede_crop2.jpg";
 import image2 from "../assets/staticSection/prodotto5.png";
 import Static1 from '../components/Static1';
 import FullMinimalSection from '../components/FullMinimalSection';
+import ciao from '../assets/test.BAT'
 
 
 function HomePage() {
@@ -41,7 +42,7 @@ function HomePage() {
                   data-aos="fade-up"
                   data-aos-duration="3000"
               >
-                  <h2 className="text-7xl text-white font-semibold">L'Oro per tutti, <br/>prima di tutti.</h2>
+                  <h1 className="text-7xl text-white font-semibold">L'Oro per tutti, <br/>prima di tutti.</h1>
                   <p className="text-xl mt-4 text-white">La prima azienda a rendere l'Oro da investimento<br/> accessibile a ogni famiglia.</p>
               </div>
               <SlArrowDown 
@@ -65,7 +66,7 @@ function HomePage() {
         descriptionClass=''
         buttonClass='border border-black text-black progress-button-dark'
         buttonText='scopri di più'
-        href='/collabora-con-noi'
+        href={ciao}
         imageUrl={ballerina2}
         imgOpacity="opacity-80"
         strength='0.14'
